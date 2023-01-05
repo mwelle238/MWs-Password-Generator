@@ -7,6 +7,7 @@ function generatePassword() {
   var needsSpecial = confirm("Do you need at least 1 special character?");
   var pwd = '';
 
+  // get password length, repeat the question if # is too small or if text is input
   do {
     var passwordLength = prompt("Enter password length 8-128:");
   } while (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128)
@@ -46,7 +47,7 @@ function generatePassword() {
   // log pwd in console
   console.log(pwd);
 
-  // randomize pwd
+  // scramble pwd
   var scramble = function (x) {
     var ss = '';
     var rand = 0;
