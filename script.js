@@ -111,7 +111,7 @@ function generatePassword() {
     pwd += allowedChars.charAt(Math.floor(Math.random()*allowedChars.length));
   }
 
-  // log pwd in console
+  // log  unscrambled pwd in console
   console.log(pwd);
 
   // scramble pwd  -- add random character to scrambled string (ss), parse the input string adding all letters to new string except the random letter, loop until all characters have been re-ordered, return ss.
