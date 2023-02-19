@@ -1,81 +1,55 @@
 // Assignment code here
 function generatePassword() {
-  // get password criteria -- if they need a type of character, then obviously they are allowed.  all allowed by defult
-  var canBeLower = true;
-  var canBeUpper = true;
-  var canBeNumber = true;
-  var canBeSpecial = true;
-  
-  var needsLower = confirm("Do you need at least 1 Lowercase letter?");
-  if(!needsLower) {
-    canBeLower = confirm("Do you want to allow lowercase letters in your password?");
-  }
-  var needsUpper = confirm("Do you need at least 1 Uppercase letter?");
-  if(!needsUpper) {
-    canBeUpper = confirm("Do you want to allow uppercase letters in your password?");
-  }
-  var needsNumber = confirm("Do you need at least 1 number?");
-  if(!needsNumber) {
-    canBeNumber = confirm("Do you want to allow numberss in your password?");
-  }
-  var needsSpecial = confirm("Do you need at least 1 special character?");
-  if(!needsSpecial) {
-    canBeSpecial = confirm("Do you want to allow special characters in your password?");
-  }
-   var pwd = '';
+  // get password criteria -- require/allowed/prohibited for each type
+  do {
+    var lowerReq = prompt("Lowercase letters: (R)equired, (A)llowed, (P)rohibited");
+    if (lowerReq === null) {
+      return; //break out of the function early
+    }
+    lowerReq = lowerReq.toUpperCase();
+  } while (lowerReq != 'R' && lowerReq != 'A' && lowerReq != 'P')
+  do {
+    var upperReq = prompt("Uppercase letters: (R)equired, (A)llowed, (P)rohibited");
+    if (upperReq === null) {
+      return; //break out of the function early
+    }
+    upperReq = upperReq.toUpperCase();
+  } while (upperReq != 'R' && upperReq != 'A' && upperReq != 'P')
+  do {
+    var numberReq = prompt("Numbers: (R)equired, (A)llowed, (P)rohibited");
+    if (numberReq === null) {
+      return; //break out of the function early
+    }
+    numberReq = numberReq.toUpperCase();
+  } while (numberReq != 'R' && numberReq != 'A' && numberReq != 'P')
+  do {
+    var specialReq = prompt("Special Characters: (R)equired, (A)llowed, (P)rohibited");
+    if (specialReq === null) {
+      return; //break out of the function early
+    }
+    specialReq = specialReq.toUpperCase();
+  } while (specialReq != 'R' && specialReq != 'A' && specialReq != 'P')
+
+ var pwd = '';
 
   // get password length, repeat the question if # is too small or if text is input
   do {
     var passwordLength = prompt("Enter password length 8-128:");
   } while (isNaN(passwordLength) || passwordLength < 8 || passwordLength > 128)
-   // if they say no to all, default to allowing only lowercase
-   
-   if (!canBeLower && !canBeUpper && !canBeNumber && !canBeSpecial) {
+
+  // if they say no to all, default to allowing only lowercase
+   if (lowerReq == 'P' && upperReq == 'P' && numberReq == 'P' && specialReq == 'P') {
     alert("You have not allowed any characters, defaulting all to lowercase");
-    canBeLower = true;
+    lowerReq = 'A';
   } else {
-    var criteria = 'Your Password Criteria:\n';
     
-    if (needsLower) {
-      criteria += 'Lowercase letters are required.\n';    
-    } else if (canBeLower) {
-      criteria += 'Lowercase letters are allowed.\n';
-    } else {
-      criteria += 'Lowercase letters are not allowed.\n';
-    }
-
-    if (needsUpper) {
-      criteria += 'Uppercase letters are required.\n';    
-    } else if (canBeUpper) {
-      criteria += 'Uppercase letters are allowed.\n';
-    } else {
-      criteria += 'Uppercase letters are not allowed.\n';
-    }
-
-    if (needsNumber) {
-      criteria += 'Numbers are required.\n';    
-    } else if (canBeNumber) {
-      criteria += 'Numbers are allowed.\n';
-    } else {
-      criteria += 'Numbers are not allowed.\n';
-    }
-
-    if (needsSpecial) {
-      criteria += 'Special Characters are required.\n';    
-    } else if (canBeSpecial) {
-      criteria += 'Special Characters are allowed.\n';
-    } else {
-      criteria += 'Special Characters are not allowed.\n';
-    }
-    alert(criteria);
-
   }
   // have console display criteria
-  console.log(needsLower);
-  console.log(needsUpper);
-  console.log(needsNumber);
-  console.log(needsSpecial);
-  console.log(passwordLength);
+  //console.log("lower: " + lowerReq);
+  //console.log("upper: " + upperReq);
+  //console.log("number: " + numberReq);
+  //console.log("special: " + specialReq);
+  //console.log(passwordLength);
 
   // define character sets
   var lowers = 'abcdefghijklmnopqrstuvwxyz';
@@ -83,13 +57,13 @@ function generatePassword() {
   var nums = '0123456789';
   var specialChars = '!"#$%&()*+,-./:;<=>?@[]^_`{|}~';
   var allowedChars = '';
-  if (canBeLower)
+  if (lowerReq == 'A' || lowerReq == 'R')
     allowedChars += lowers;
-  if (canBeUpper)
+  if (upperReq == 'A' || upperReq == 'R')
     allowedChars += uppers;
-  if (canBeNumber)
+  if (numberReq == 'A' || numberReq == 'R')
     allowedChars += nums;
-  if (canBeSpecial)
+  if (specialReq == 'A' || specialReq == 'R')
     allowedChars += specialChars;
  
   /* I will be adding 1 of each of the required characters to the beginning of the pwd string, 
@@ -97,13 +71,13 @@ function generatePassword() {
    then randomizing the order of the string */
   
   // adding required characters
-  if (needsLower)
+  if (lowerReq == 'R')
     pwd += lowers.charAt(Math.floor(Math.random()*lowers.length));
-  if (needsUpper)
+  if (upperReq == 'R')
     pwd += uppers.charAt(Math.floor(Math.random()*uppers.length));
-  if (needsNumber)
+  if (numberReq == 'R')
     pwd += nums.charAt(Math.floor(Math.random()*nums.length));
-  if (needsSpecial)
+  if (specialReq == 'R')
     pwd += specialChars.charAt(Math.floor(Math.random()*specialChars.length));
 
   // filling out characters with a selection from all subsets  
@@ -122,19 +96,13 @@ function generatePassword() {
       tmp = '';
       rand = Math.floor(Math.random()*x.length);
       ss += x.charAt(rand);
-      for (var i = 0; i<x.length; i++) {
-        if (i != rand) {
-          tmp += x.charAt(i);
-        }
-      }
-      x = tmp; 
+      x = x.substring(0,rand) + x.substring(rand+1);
+      //x = tmp; 
     }
     console.log(ss);
     return ss;
   }
-
-  return scramble(pwd);
-  
+  return scramble(pwd);  
 }
 
 // Get references to the #generate element
@@ -144,9 +112,7 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
