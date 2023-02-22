@@ -24,5 +24,5 @@ Please refer to the LICENSE in the repo.
 ## Screenshots
 
 ![open page snip](https://github.com/mwelle238/MWs-Password-Generator/blob/main/screenshots/image1.JPG?raw=true)
-![click button snip](https://github.com/mwelle238/MWs-Password-Generator/blob/main/screenshots/image2.JPG?raw=true)
+![click button snip](https://github.com/mwelle238/MWs-Password-Generator/blob/main/screenshots/Image2.JPG?raw=true)
 ![generated password snip](https://github.com/mwelle238/MWs-Password-Generator/blob/main/screenshots/image3.JPG?raw=true)
